@@ -1,0 +1,1 @@
+from model.tarefa import Tarefa

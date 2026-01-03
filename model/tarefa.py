@@ -1,4 +1,3 @@
-
 class Tarefa:
     next_id = 1
 
