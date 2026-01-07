@@ -1,4 +1,5 @@
 from model.tarefa import Tarefa
+from model.storage import *
 
 def list_task(dict_task:dict) -> dict:
     if dict_task:
@@ -6,20 +7,23 @@ def list_task(dict_task:dict) -> dict:
         
         for task in dict_task.values():
             print(f'{task.id}  |  {task.titulo}  |  {task.categoria}  |  {task.status}')
-
     else:
         print("\nNenhuma tarefa registrada!")
     
 def list_filter_cat(dict_task,filter_task):
-    if filter_task in dict_task['categoria']:
-        task = dict_task
-        print(task.print_task())
+    new_dict_task = {}
+    for task in dict_task.values():
+        if task.categoria == filter_task:
+            new_dict_task[task.id] = task
+    if len(new_dict_task)==0:
+         print("\nNenhuma categoria localizada!")
     else:
-        print("\nCategoria não localizada!")
+         list_task(new_dict_task)
         
 def up_task(dict_task: dict,id_task:int) -> dict:
     if id_task in dict_task:
          dict_task[id_task].up_status_task()
+         convert_dict_json(dict_task) 
     else:
          print("\n ID não localizado!")
     return dict_task
@@ -44,16 +48,17 @@ def input_validate_int(strings):
 
 def add_task(dict_task: dict,task_name: str, task_category:str) -> dict:
     result = exist_validate(dict_task,task_name,task_category)
-
     if not result:
         new_task = Tarefa(task_name,task_category)
-        dict_task[new_task.id] = new_task   
+        dict_task[new_task.id] = new_task  
+        convert_dict_json(dict_task) 
         print("\nTarefa registrada com sucesso!")
     return dict_task   
-         
+
 def remove_task(dict_task: dict, id_task:int) -> dict:
     if id_task in dict_task:
         del dict_task[id_task]
+        convert_dict_json(dict_task) 
         print("\nTarefa removida com sucesso!")
     else:
         print("\nCategoria não localizada!")

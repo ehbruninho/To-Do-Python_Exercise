@@ -1,7 +1,11 @@
 from view.menu import menu
+from model.storage import *
 
 def main():
-    dict_task = {}
+    if exist_archive():
+        dict_task = convert_json_obj()
+    else:
+        dict_task = {}
     menu(dict_task)
 
 if __name__ == "__main__":

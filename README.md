@@ -1,95 +1,78 @@
-# 📝 Sistema de Gestão de Tarefas (To-Do) em Python
+---
 
-Projeto desenvolvido como parte de um **desafio de lógica e programação em Python (Nível 3)**, com foco em organização de código, Programação Orientada a Objetos (POO), validações e fluxo de execução limpo.
+## 🔄 Evolução do Projeto
+
+Este projeto faz parte de uma sequência de desafios práticos em Python, com aumento progressivo de complexidade e maturidade de código.
+
+### 🧩 Nível 3 – Sistema de Tarefas em Memória
+Versão inicial do projeto, com foco em lógica e Programação Orientada a Objetos.
+
+**Características:**
+- Execução via terminal
+- Dados mantidos apenas em memória
+- Estrutura simples com listas e objetos
+- Menu interativo em loop
+
+> ⚠️ Ao encerrar o programa, todas as tarefas eram perdidas.
 
 ---
 
-## 🎯 Objetivo do Desafio
+### 🚀 Nível 4 – Sistema de Tarefas com Persistência (Versão Atual)
 
-Criar um sistema simples de gerenciamento de tarefas (To-Do), executado via terminal, **sem uso de banco de dados**, com todas as informações mantidas em memória durante a execução do programa.
+Evolução direta do projeto, agora com foco em **organização de responsabilidades e persistência de dados**, simulando um fluxo mais próximo de aplicações reais.
 
-O desafio busca testar:
-- Lógica de programação
-- Modularização
-- Uso de classes e objetos
-- Validações de entrada
-- Controle de fluxo com menu interativo
+#### 🎯 Objetivos do Nível 4
+- Manter estado entre execuções
+- Separar melhor as responsabilidades do sistema
+- Criar um código mais organizado e sustentável
+- Garantir que os dados sobrevivam ao fechamento do programa
 
----
+#### 📦 Novo Conceito Central
+Persistência de dados em arquivo **JSON**.
 
-## 🛠️ Funcionalidades
+- Ao iniciar o programa:
+  - Se o arquivo existir → carrega as tarefas
+  - Se não existir → inicia vazio
+- Ao adicionar, remover ou atualizar:
+  - Os dados são salvos automaticamente no arquivo
 
-O sistema possui um menu em loop com as seguintes opções:
+> 📌 Não é banco de dados. É persistência em arquivo.
 
-1. Adicionar tarefa  
-2. Listar tarefas  
-3. Filtrar tarefas por categoria  
-4. Marcar tarefa como concluída  
-5. Remover tarefa  
-6. Sair  
+#### 🧱 Separação de Responsabilidades
+O projeto passa a ter papéis bem definidos:
 
----
+- **Camada de Dados**
+  - Carregar tarefas do arquivo JSON
+  - Salvar tarefas no arquivo
 
-## 📌 Regras de Negócio
+- **Camada de Regras**
+  - Adicionar tarefas
+  - Remover tarefas
+  - Atualizar status
+  - Validar existência
 
-### ➕ Adicionar tarefa
-- O usuário informa:
-  - Título
-  - Categoria
-- Valida se os campos não estão vazios
-- Gera um **ID único incremental**
-- Evita duplicidade de tarefas com mesmo título e categoria
+- **Interface (Menu)**
+  - Interagir com o usuário
+  - Exibir mensagens
+  - Chamar as regras do sistema
 
-### 📋 Listar tarefas
-Formato de exibição:
+> O menu **não manipula diretamente** listas ou dicionários.
 
-ID | Título | Categoria | Status
+#### 📌 Estrutura da Tarefa
+A classe `Tarefa` foi mantida, contendo:
+- id
+- título
+- categoria
+- status
 
+Além disso, foi implementada a conversão:
+- Objeto → JSON (para salvar)
+- JSON → Objeto (para carregar)
 
-### 🔍 Filtrar por categoria
-- Exibe apenas tarefas da categoria informada
-- Caso não encontre, informa o usuário
-
-### ✅ Marcar como concluída
-- Usuário informa o ID
-- Valida se a tarefa existe
-- Alterna o status entre **Pendente** e **Concluído**
-
-### ❌ Remover tarefa
-- Usuário informa o ID
-- Valida existência
-- Remove a tarefa da lista
-
----
-
-## 🧱 Estrutura do Projeto
-
-
-<img width="395" height="82" alt="image" src="https://github.com/user-attachments/assets/f044c807-7b98-48cf-975c-c88a6dd63193" />
-
-
----
-
-## 🧠 Conceitos Aplicados
-
-- Programação Orientada a Objetos (POO)
-- Listas e objetos em memória
-- Funções bem definidas e separadas
-- Validação de entrada do usuário
-- Controle de fluxo com menu em loop
-- Organização e legibilidade de código
-
----
-
-## 🚀 Como Executar
-
-1. Clone o repositório
-2. Certifique-se de ter o Python 3 instalado
-3. Execute o arquivo principal:
-
-```bash
-python menu.py
-
-👨‍💻 Autor
-
-Projeto desenvolvido por Bruno, estudante de Sistemas de Informação, com foco em evolução prática em Python e desenvolvimento de software.
+#### ✅ Funcionalidades
+- Adicionar tarefa
+- Listar tarefas
+- Filtrar por categoria
+- Marcar como concluída
+- Remover tarefa
+- Persistência automática em arquivo
