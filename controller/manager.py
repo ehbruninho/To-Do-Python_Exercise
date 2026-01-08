@@ -1,5 +1,8 @@
 from model.tarefa import Tarefa
+<<<<<<< HEAD
 from model.storage import *
+=======
+>>>>>>> 849d99c37d4b86a35e2a809d9ea46aa331779006
 
 def list_task(dict_task:dict) -> dict:
     if dict_task:
@@ -7,10 +10,14 @@ def list_task(dict_task:dict) -> dict:
         
         for task in dict_task.values():
             print(f'{task.id}  |  {task.titulo}  |  {task.categoria}  |  {task.status}')
+<<<<<<< HEAD
+=======
+>>>>>>> 849d99c37d4b86a35e2a809d9ea46aa331779006
     else:
         print("\nNenhuma tarefa registrada!")
     
 def list_filter_cat(dict_task,filter_task):
+<<<<<<< HEAD
     new_dict_task = {}
     for task in dict_task.values():
         if task.categoria == filter_task:
@@ -19,11 +26,21 @@ def list_filter_cat(dict_task,filter_task):
          print("\nNenhuma categoria localizada!")
     else:
          list_task(new_dict_task)
+=======
+    if filter_task in dict_task['categoria']:
+        task = dict_task
+        print(task.print_task())
+    else:
+        print("\nCategoria não localizada!")
+>>>>>>> 849d99c37d4b86a35e2a809d9ea46aa331779006
         
 def up_task(dict_task: dict,id_task:int) -> dict:
     if id_task in dict_task:
          dict_task[id_task].up_status_task()
+<<<<<<< HEAD
          convert_dict_json(dict_task) 
+=======
+>>>>>>> 849d99c37d4b86a35e2a809d9ea46aa331779006
     else:
          print("\n ID não localizado!")
     return dict_task
@@ -48,6 +65,7 @@ def input_validate_int(strings):
 
 def add_task(dict_task: dict,task_name: str, task_category:str) -> dict:
     result = exist_validate(dict_task,task_name,task_category)
+<<<<<<< HEAD
     if not result:
         new_task = Tarefa(task_name,task_category)
         dict_task[new_task.id] = new_task  
@@ -59,6 +77,18 @@ def remove_task(dict_task: dict, id_task:int) -> dict:
     if id_task in dict_task:
         del dict_task[id_task]
         convert_dict_json(dict_task) 
+=======
+
+    if not result:
+        new_task = Tarefa(task_name,task_category)
+        dict_task[new_task.id] = new_task   
+        print("\nTarefa registrada com sucesso!")
+    return dict_task   
+         
+def remove_task(dict_task: dict, id_task:int) -> dict:
+    if id_task in dict_task:
+        del dict_task[id_task]
+>>>>>>> 849d99c37d4b86a35e2a809d9ea46aa331779006
         print("\nTarefa removida com sucesso!")
     else:
         print("\nCategoria não localizada!")
